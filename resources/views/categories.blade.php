@@ -8,10 +8,10 @@
     <ul>
         @foreach ($categories as $category)
             <li>
-                <h2><a href="/categories/{{ $category->slug }}">{{ $category->name }}</a></h2>
+                <h2><a href="/categories/{{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a></h2>
             </li>
         @endforeach
     </ul>
 
-    <a href="/">Back to home</a>
+    <a href="/" class="text-decoration-none">Back to home</a>
 @endsection

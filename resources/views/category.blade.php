@@ -8,11 +8,12 @@
     @foreach ($posts as $post)
         <article class="mb-5">
             <h2>
-                <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+                <a href="/posts/{{ $post->slug }}" class="text-decoration-none">{{ $post->title }}</a>
             </h2>
             <p>{{ $post->excerpt }}</p>
+            <a href="/posts/{{ $post->slug }}" class="text-decoration-none">Read more ...</a>
         </article>
     @endforeach
 
-    <a href="/categories">Back to categories</a>
+    <a href="/categories" class="text-decoration-none">Back to categories</a>
 @endsection
