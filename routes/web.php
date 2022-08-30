@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
-// use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +34,19 @@ Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
 // function show(Post $post)
 // Karena buat jalanin Route Model Binding
+
+Route::get('/categories/{category:slug}', function (Category $category) {
+    return view('category', [
+        "title" => $category->name,
+        "posts" => $category->posts,
+        "category" => $category->name
+    ]);
+});
+
+Route::get('/categories', function () {
+    return view('categories', [
+        // kalo title dicomment, nanti error stack nya ga munculin error di baris ini. aneh
+        "title" => 'Categories',
+        "categories" => Category::all()
+    ]);
+});

@@ -15,6 +15,7 @@ class PostController extends Controller
         ]);
     }
 
+    // Model $post didapetin dari url, dan ditandai dengan slug di web.php
     public function show(Post $post)
     {
         return view('post', [
