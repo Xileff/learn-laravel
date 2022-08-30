@@ -30,4 +30,8 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{slug}', [PostController::class, 'show']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+// Ini bakal passing {post} ke method show. Dan {post} harus sama dgn nama parameter yg ada di method show
+
+// function show(Post $post)
+// Karena buat jalanin Route Model Binding
