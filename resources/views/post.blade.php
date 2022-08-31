@@ -6,10 +6,10 @@
             <div class="col-md-8">
                 <h1>{{ $post->title }}</h1>
 
-                <p>By. <a href="/authors/{{ $post->author->username }}"
+                <p>By. <a href="/posts?author={{ $post->author->username }}"
                         class="text-decoration-none">{{ $post->author->username }}</a>
                     in
-                    <a href="/categories/{{ $post->category->slug }}"
+                    <a href="/posts?category={{ $post->category->slug }}"
                         class="text-decoration-none">{{ $post->category->name }}</a>
                 </p>
 
