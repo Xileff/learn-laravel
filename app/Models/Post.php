@@ -14,6 +14,7 @@ class Post extends Model
 
     // Yg ga boleh diisi langsung
     protected $guarded = ['id'];
+    protected $with = ['category', 'author'];
 
     // nama method harusnya sesuai nama field di database
     public function author()
