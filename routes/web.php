@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,13 @@ Route::get('/categories', function () {
         // kalo title dicomment, nanti error stack nya ga munculin error di baris ini. aneh
         "title" => 'Categories',
         "categories" => Category::all()
+    ]);
+});
+
+Route::get('/authors/{author:username}', function (User $author) {
+    return view('posts', [
+        'title' => 'All Posts by ' . $author->username,
+        'posts' => $author->posts
+        // $author->posts akan memanggil method posts yg ada di model User
     ]);
 });

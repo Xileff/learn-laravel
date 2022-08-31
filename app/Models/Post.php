@@ -15,9 +15,10 @@ class Post extends Model
     // Yg ga boleh diisi langsung
     protected $guarded = ['id'];
 
-    public function user()
+    // nama method harusnya sesuai nama field di database
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function category()
