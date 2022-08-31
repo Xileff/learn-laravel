@@ -37,9 +37,10 @@ Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 // Karena buat jalanin Route Model Binding
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        "title" => $category->name,
-        "posts" => $category->posts,
+    return view('posts', [
+        "title" => "Category : $category->name",
+        // kalo route model binding, gini cara utk menghindari N+1 problem
+        "posts" => $category->posts->load('category', 'author'),
         "category" => $category->name
     ]);
 });
@@ -55,7 +56,7 @@ Route::get('/categories', function () {
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
         'title' => 'All Posts by ' . $author->username,
-        'posts' => $author->posts
+        'posts' => $author->posts->load('category', 'author')
         // $author->posts akan memanggil method posts yg ada di model User
     ]);
 });
