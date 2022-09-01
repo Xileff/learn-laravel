@@ -41,8 +41,7 @@ class Post extends Model
         // Perbaikan di atas
         $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where(function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%')
-                    ->orWhere('body', 'like', '%' . $search . '%');
+                $query->where('title', 'like', '%' . $search . '%')->orWhere('body', 'like', '%' . $search . '%');
             });
         });
 
@@ -56,17 +55,13 @@ class Post extends Model
             });
         });
 
-        $query->when(
-            $filters['author'] ?? false,
-            fn ($query, $author) =>
-            $query->whereHas(
-                // parameter whereHas() adalah method yg dimiliki model ini(category/author). gunanya untuk cek relasi
-                'author',
-                fn ($query) =>
-                $query->where('username', $author)
-                // parameter where() adalah nama kolom, gunanya utk build query
-            )
-        );
+        // // parameter whereHas() adalah method yg dimiliki model ini(category/author). gunanya untuk cek relasi
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            return $query->whereHas('author', function ($query) use ($author) {
+                $query->where('username', $author);
+            });
+        });
+        // parameter where() adalah nama kolom, gunanya utk build query
     }
 
     // Contoh pemanggilan : 

@@ -77,6 +77,11 @@
     @else
         <p class="text-center fs-4">No posts found.</p>
     @endif
+
+    <div class="">
+        {{ $posts->links() }}
+    </div>
+
 @endsection
 
 {{-- ini harus pake eager loading, karena jika tidak akan tjd N+1 problem --}}

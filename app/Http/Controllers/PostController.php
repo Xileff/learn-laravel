@@ -26,7 +26,7 @@ class PostController extends Controller
             "title" => "All Posts" . $title,
 
             // Kalo jalanin get(), kueri baru dijalankan database
-            "posts" =>  Post::latest()->filter(request(['search', 'category', 'author']))->get()
+            "posts" =>  Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
         ]);
     }
 
