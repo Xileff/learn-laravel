@@ -11,18 +11,31 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                 </div>
             @endif
+
+            @if (session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ session('loginError') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            @endif
+
             <main class="form-signin">
                 <h1 class="h3 mb-3 fw-normal text-center">Please log in</h1>
-                <form action="/register" method="post">
+                <form action="/login" method="post">
+                    @csrf
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            name="email">
-                        <label for="floatingInput">Email address</label>
+                        <input required type="email" class="form-control @error('email') is-invalid @enderror"
+                            id="email" placeholder="name@example.com" name="email" autofocus
+                            value="{{ old('email') }}">
+                        <label for="email">Email address</label>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                        <input required type="password" class="form-control" id="password" placeholder="Password"
                             name="password">
-                        <label for="floatingPassword">Password</label>
+                        <label for="password">Password</label>
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
                 </form>
