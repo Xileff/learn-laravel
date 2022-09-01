@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Models\Post;
 use App\Models\Category;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +55,6 @@ Route::get('/categories', function () {
     ]);
 });
 
-// Route::get('/authors/{author:username}', function (User $author) {
-//     return view('posts', [
-//         'title' => 'All Posts by ' . $author->username,
-//         'posts' => $author->posts->load('category', 'author')
-//         // $author->posts akan memanggil method posts yg ada di model User
-//     ]);
-// });
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
