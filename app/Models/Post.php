@@ -66,4 +66,9 @@ class Post extends Model
 
     // Contoh pemanggilan : 
     // Post::latest()->filter(request(['search']))->get()
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
