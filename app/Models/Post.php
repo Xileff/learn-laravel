@@ -33,10 +33,22 @@ class Post extends Model
     public function scopeFilter($query, array $filters)
     {
         // Ini versi singkat daripada yang di atas
+        // $query->when($filters['search'] ?? false, function ($query, $search) {
+        //     return $query->where('title', 'like', '%' . $search . '%')
+        //         ->orWhere('body', 'like', '%' . $search . '%');
+        // });
+
+        // Perbaikan di atas
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%')
-                ->orWhere('body', 'like', '%' . $search . '%');
+            return $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%');
+            });
         });
+
+        // Itu kalo ga diperbaikin, ini bakal salah kueri
+        // http://127.0.0.1:8000/posts?author=plailasari&search=accusamus&category=personal
+        // Hasil kuerinya ga bener
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
             return $query->whereHas('category', function ($query) use ($category) {

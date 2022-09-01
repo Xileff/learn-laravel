@@ -45,13 +45,13 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     ]);
 });
 
-// Route::get('/categories', function () {
-//     return view('categories', [
-//         // kalo title dicomment, nanti error stack nya ga munculin error di baris ini. aneh
-//         "title" => 'Categories',
-//         "categories" => Category::all()
-//     ]);
-// });
+Route::get('/categories', function () {
+    return view('categories', [
+        // kalo title dicomment, nanti error stack nya ga munculin error di baris ini. aneh
+        "title" => 'Categories',
+        "categories" => Category::all()
+    ]);
+});
 
 // Route::get('/authors/{author:username}', function (User $author) {
 //     return view('posts', [
