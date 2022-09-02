@@ -26,8 +26,9 @@
     @if ($posts->count())
         {{-- Hero post --}}
         <div class="card mb-3">
-            <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
-                alt="{{ $posts[0]->category->name }}">
+            <img src="{{ $posts[0]->image == null ? "https://source.unsplash.com/1200x400? $posts[0]->category->name" : str_replace('public', 'storage', asset($posts[0]->image)) }}"
+                class="posts-hero">
+
             <div class="card-body text-center">
                 <h5 class="card-title">{{ $posts[0]->title }}</h5>
 
@@ -59,8 +60,8 @@
                                 <a href="/posts?category={{ $post->category->slug }}"
                                     class="text-decoration-none text-light">{{ $post->category->name }}</a>
                             </div>
-                            <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}" class="card-img-top"
-                                alt="{{ $post->category->name }}">
+                            <img
+                                src="{{ $post->image == null ? "https://source.unsplash.com/500x400? $post->category->name" : str_replace('public', 'storage', asset($post->image)) }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
                                 <small class="text-muted">

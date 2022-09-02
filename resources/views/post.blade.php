@@ -6,15 +6,16 @@
             <div class="col-md-8">
                 <h1>{{ $post->title }}</h1>
 
-                <p>By. <a href="/posts?author={{ $post->author->username }}"
-                        class="text-decoration-none">{{ $post->author->username }}</a>
-                    in
-                    <a href="/posts?category={{ $post->category->slug }}"
+                <p>{{ $post->created_at == $post->updated_at ? 'By ' : 'Updated by ' }} <a
+                        href="/posts?author={{ $post->author->username }}"
+                        class="text-decoration-none">{{ $post->author->username }}</a> in <a
+                        href="/posts?category={{ $post->category->slug }}"
                         class="text-decoration-none">{{ $post->category->name }}</a>
+                    {{ $post->created_at == $post->updated_at ? $post->created_at->diffForHumans() : $post->updated_at->diffForHumans() }}
                 </p>
 
-                <img src="https://source.unsplash.com/1000x400?{{ $post->category->name }}" alt="{{ $post->category->name }}"
-                    class="img-fluid">
+                <img src="{{ $post->image == null ? "https://source.unsplash.com/1000x400? $post->category->name" : str_replace('public', 'storage', asset($post->image)) }}"
+                    class="post-hero">
 
                 <article class="my-3 fs-5">
                     {!! $post->body !!}

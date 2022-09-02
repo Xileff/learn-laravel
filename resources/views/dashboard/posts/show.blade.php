@@ -16,7 +16,7 @@
                             data-feather="x-circle"></span> Delete</button>
                 </form>
 
-                <img src="https://source.unsplash.com/1000x400?{{ $post->category->name }}"
+                <img src="{{ $post->image == null ? "https://source.unsplash.com/1000x400? $post->category->name" : str_replace('public', 'storage', asset($post->image)) }}"
                     alt="{{ $post->category->name }}" class="img-fluid mt-3">
 
                 <article class="my-3 fs-5">

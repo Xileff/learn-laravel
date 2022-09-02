@@ -4,12 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
-use Illuminate\Database\Seeder;
-
 use function PHPSTORM_META\map;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +21,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(3)->create();
-        Post::factory(20)->create();
+        User::create([
+            'name' => 'Felix Savero',
+            'username' => 'Styx',
+            'email' => 'felixsavero@gmail.com',
+            'password' => Hash::make('password')
+        ]);
 
         Category::create([
             'name' => 'Web Programming',
@@ -37,5 +42,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Personal',
             'slug' => 'personal'
         ]);
+
+        User::factory(3)->create();
+        Post::factory(20)->create();
     }
 }

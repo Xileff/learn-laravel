@@ -11,3 +11,15 @@
 input[name="body"] {
     font-family: 'Times New Roman', Times, serif !important;
 }
+
+.posts-hero {
+    max-width: 1200px;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.post-hero {
+    max-width: 1000px;
+    max-height: 400px;
+    object-fit: cover;
+}
