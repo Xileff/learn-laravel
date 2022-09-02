@@ -32,11 +32,13 @@
                 <h5 class="card-title">{{ $posts[0]->title }}</h5>
 
                 <small class="text-muted">
-                    <p>By. <a href="/posts?author={{ $posts[0]->author->username }}"
+                    <p>{{ $posts[0]->created_at == $posts[0]->updated_at ? 'By ' : 'Updated by ' }} <a
+                            href="/posts?author={{ $posts[0]->author->username }}"
                             class="text-decoration-none">{{ $posts[0]->author->username }}</a> in <a
                             href="/posts?category={{ $posts[0]->category->slug }}"
                             class="text-decoration-none">{{ $posts[0]->category->name }}</a>
-                        {{ $posts[0]->created_at->diffForHumans() }}</p>
+                        {{ $posts[0]->created_at == $posts[0]->updated_at ? $posts[0]->created_at->diffForHumans() : $posts[0]->updated_at->diffForHumans() }}
+                    </p>
                 </small>
 
                 <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -62,9 +64,11 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
                                 <small class="text-muted">
-                                    <p>By. <a href="/posts?author={{ $post->author->username }}"
+                                    <p>{{ $post->created_at == $post->updated_at ? 'By ' : 'Updated by ' }} <a
+                                            href="/posts?author={{ $post->author->username }}"
                                             class="text-decoration-none">{{ $post->author->username }}</a>
-                                        {{ $post->created_at->diffForHumans() }}</p>
+                                        {{ $post->created_at == $post->updated_at ? $post->created_at->diffForHumans() : $post->updated_at->diffForHumans() }}
+                                    </p>
                                 </small>
                                 <p class="card-text">{{ $post->excerpt }}</p>
                                 <a href="/posts/{{ $post->slug }}" class="btn btn-primary">Read more</a>
