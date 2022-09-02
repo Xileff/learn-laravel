@@ -41,9 +41,10 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Post Image</label>
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
-                    name="image">
+                <label for="imgInput" class="form-label">Post Image</label>
+                <img src="" id="imgPreview" class="img-fluid col-md-5 mx-auto">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="imgInput"
+                    name="image" onchange="previewImage()">
                 @error('image')
                     {{ $message }}
                 @enderror
@@ -63,4 +64,5 @@
     </div>
 
     <script src="/js/createSlug.js"></script>
+    <script src="/js/previewImage.js"></script>
 @endsection

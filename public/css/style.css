@@ -13,9 +13,15 @@ input[name="body"] {
 }
 
 .posts-hero {
-    max-width: 1200px;
     max-height: 400px;
     object-fit: cover;
+}
+
+.posts-thumbnail {
+    height: 20rem;
+    max-height: 720px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .post-hero {

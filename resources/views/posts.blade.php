@@ -60,8 +60,9 @@
                                 <a href="/posts?category={{ $post->category->slug }}"
                                     class="text-decoration-none text-light">{{ $post->category->name }}</a>
                             </div>
-                            <img
-                                src="{{ $post->image == null ? "https://source.unsplash.com/500x400? $post->category->name" : str_replace('public', 'storage', asset($post->image)) }}">
+                            {{-- blade-formatter-disable-next-line --}}
+                            <img src="{{ $post->image == null ? 'https://source.unsplash.com/500x400?'.$post->category->name : str_replace('public', 'storage', asset($post->image)) }}"
+                            class="posts-thumbnail">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
                                 <small class="text-muted">

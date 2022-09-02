@@ -6,13 +6,14 @@
     </div>
 
     <div class="col-lg-8">
-        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="mb-5"> {{-- route default + method post akan mengarah ke method store(), jika tipe controllernya resource --}}
+        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="mb-5" enctype="multipart/form-data">
+            {{-- route default + method post akan mengarah ke method store(), jika tipe controllernya resource --}}
             @csrf
             @method('put')
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    required autofocus value="{{ old('title', $post->title) }}">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                    name="title" required autofocus value="{{ old('title', $post->title) }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -42,6 +43,16 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="imgInput" class="form-label">Post Image</label>
+                <img src="{{ $post->image != null ? str_replace('public', 'storage', asset($post->image)) : '' }}"
+                    id="imgPreview" class="img-fluid col-md-5 mx-auto {{ $post->image != null ? 'd-block mb-3' : '' }}">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="imgInput"
+                    name="image" onchange="previewImage()">
+                @error('image')
+                    {{ $message }}
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 <input id="body" type="hidden" name="body" class="normal-font"
                     value="{{ old('body', $post->body) }}" required>
@@ -51,9 +62,14 @@
                 @enderror
             </div>
 
+            <p></p>
+            <p></p>
+            <p></p>
+
             <button type="submit" class="btn btn-warning">Save Changes</button>
         </form>
     </div>
 
     <script src="/js/createSlug.js"></script>
+    <script src="/js/previewImage.js"></script>
 @endsection
