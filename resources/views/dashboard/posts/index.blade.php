@@ -6,8 +6,9 @@
     </div>
 
     @if (session()->has('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-lg-8" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
@@ -33,11 +34,15 @@
                             <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info">
                                 <span data-feather="eye"></span>
                             </a>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-warning">
+                            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">
                                 <span data-feather="edit"></span>
                             </a>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-danger">
-                                <span data-feather="x-circle"></span>
+                            <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+                                @method('delete')
+                                @csrf
+                                <button onclick="return confirm('Are you sure?')" class="btn btn-danger border-0"><span
+                                        data-feather="x-circle"></span></button>
+                            </form>
                             </a>
                         </td>
                     </tr>
