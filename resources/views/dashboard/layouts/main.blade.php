@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{{-- Dashboard view --}}
 
 <head>
     <meta charset="utf-8">
@@ -13,7 +14,17 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="/css/trix.css">
+    <script type="text/javascript" src="/js/trix.js"></script>
 </head>
+
+<style>
+    trix-toolbar [data-trix-button-group="file-tools"] {
+        display: none;
+    }
+</style>
 
 <body>
 
@@ -42,6 +53,11 @@
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
     </script> --}}
     <script src="/js/dashboard.js"></script>
+    <script>
+        document.addEventListener('trix-file-accept', function(e) {
+            e.preventDefault();
+        })
+    </script>
 </body>
 
 </html>

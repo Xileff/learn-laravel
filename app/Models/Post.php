@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     // Yg boleh diisi langsung 
     // protected $fillable = ['title', 'excerpt', 'body'];
@@ -67,8 +68,19 @@ class Post extends Model
     // Contoh pemanggilan : 
     // Post::latest()->filter(request(['search']))->get()
 
+    // ini gunanya buat pake kolom selain id utk identifier di link post
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    // dipake di index.blade.php dashboard
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

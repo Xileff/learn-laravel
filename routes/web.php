@@ -65,4 +65,5 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 
 Route::get('/dashboard', fn () => view('dashboard.index', ["title" => "Laravel 9 | Dashboard"]))->middleware('auth');
 
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
