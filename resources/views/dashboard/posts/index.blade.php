@@ -34,9 +34,11 @@
                             <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info">
                                 <span data-feather="eye"></span>
                             </a>
+                            {{-- Kalo dikasih /edit setelah slug, maka Router untuk model yg bertipe resource akan memanggil method edit --}}
                             <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">
                                 <span data-feather="edit"></span>
                             </a>
+                            {{-- method edit untuk nampilin data, method update untuk prosesnya --}}
                             <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf

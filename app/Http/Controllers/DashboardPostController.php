@@ -70,7 +70,10 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
         return view("dashboard.posts.show", [
             "title" => "Laravel 9 | My Posts",
             "post" => $post
@@ -85,7 +88,15 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return view('dashboard.posts.edit', [
+            "title" => "Laravel 9 | My Posts",
+            "post" => $post,
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -95,9 +106,33 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
+    // post adalah data postingan yang lama.
+    // Controller ini bisa tau karena route model binding dari halaman dashboard.posts ke dashboard.posts.edit
     public function update(Request $request, Post $post)
     {
-        //
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        $rules = [
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'body' => 'required'
+        ];
+
+        // pengecekan slug hanya dilakukan jika slug diganti
+        if ($request->slug != $post->slug) {
+            $rules['slug'] = 'required|unique:posts';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 200);
+
+        Post::where('id', $post->id)->update($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'Post updated succesfully');
     }
 
     /**
