@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/dashboard">
+                <a class="nav-link" href="/dashboard">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
@@ -14,6 +14,20 @@
                 </a>
             </li>
         </ul>
+
+        {{-- Gate yg dibuat di AppServiceProvider.php --}}
+        @can('admin')
+            {{-- blade-formatter-disable-next-line --}}
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Administrator</h6>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/categories">
+                        <span data-feather="grid"></span>
+                        Post Categories
+                    </a>
+                </li>
+            </ul>
+        @endcan
     </div>
 </nav>
 
