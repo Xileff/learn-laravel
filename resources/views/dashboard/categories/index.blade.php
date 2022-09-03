@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <a href="/dashboard/posts/create" class="btn btn-primary">Create New Category</a>
+    <a href="/dashboard/categories/create" class="btn btn-primary">Create New Category</a>
 
     <div class="table-responsive col-lg-6">
         <table class="table table-striped table-sm">
@@ -29,9 +29,6 @@
                         <td>{{ $category->title }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <a href="/dashboard/categories/{{ $category->slug }}" class="btn btn-info">
-                                <span data-feather="eye"></span>
-                            </a>
                             {{-- Kalo dikasih /edit setelah slug, maka Router untuk model yg bertipe resource akan memanggil method edit --}}
                             <a href="/dashboard/categories/{{ $category->slug }}/edit" class="btn btn-warning">
                                 <span data-feather="edit"></span>
