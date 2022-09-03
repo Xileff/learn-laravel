@@ -26,8 +26,9 @@
     @if ($posts->count())
         {{-- Hero post --}}
         <div class="card mb-3">
-            <img src="{{ $posts[0]->image == null ? "https://source.unsplash.com/1200x400? $posts[0]->category->name" : str_replace('public', 'storage', asset($posts[0]->image)) }}"
-                class="posts-hero">
+            {{-- blade-formatter-disable-next-line --}}
+            <img src="{{ $posts[0]->image == null ? "https://source.unsplash.com/1200x400?".$posts[0]->category->name : str_replace('public', 'storage', asset($posts[0]->image)) }}"
+            class="posts-hero">
 
             <div class="card-body text-center">
                 <h5 class="card-title">{{ $posts[0]->title }}</h5>
